@@ -1,0 +1,4 @@
+schema: spec-driven
+created: 2026-07-17
+goal: Deliver a runnable, bilingual five-day NestJS course whose fifteen lessons
+  all pass repository validation and independent reviewer gates.

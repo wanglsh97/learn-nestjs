@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 650" role="img" aria-labelledby="title desc">
+  <title id="title">DTO validation and API contract flow</title>
+  <desc id="desc">HTTP input passes through a Guard, string trimming, and ValidationPipe before the Controller. A Filter returns validation errors, while Swagger derives a contract from the same DTO metadata.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#e9ecef" stroke-width="1"/></pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#495057"/></marker>
+    <style>text{font-family:'Arial',sans-serif;fill:#1b1b1f}.title{font-size:25px;font-weight:700}.label{font-size:18px;font-weight:700}.note{font-size:14px;fill:#495057}.small{font-size:13px;fill:#495057}.box{stroke-width:2;rx:12}.line{fill:none;stroke:#495057;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect width="1080" height="650" fill="#fff"/><rect width="1080" height="650" fill="url(#grid)"/>
+  <text x="48" y="52" class="title">DTO validation: reject untrusted input before business logic</text>
+  <rect x="60" y="116" width="180" height="82" class="box" fill="#f1f3f5" stroke="#495057"/><text x="150" y="150" text-anchor="middle" class="label">HTTP JSON</text><text x="150" y="176" text-anchor="middle" class="note">plain / untrusted</text>
+  <rect x="300" y="116" width="180" height="82" class="box" fill="#ffe3e3" stroke="#c92a2a"/><text x="390" y="150" text-anchor="middle" class="label">ApiKeyGuard</text><text x="390" y="176" text-anchor="middle" class="note">authorize writes first</text>
+  <rect x="540" y="116" width="180" height="82" class="box" fill="#ffe8cc" stroke="#d9480f"/><text x="630" y="150" text-anchor="middle" class="label">TrimStringsPipe</text><text x="630" y="176" text-anchor="middle" class="note">trim top-level strings</text>
+  <rect x="780" y="105" width="235" height="104" class="box" fill="#ffec99" stroke="#e67700"/><text x="897" y="140" text-anchor="middle" class="label">ValidationPipe</text><text x="897" y="166" text-anchor="middle" class="note">transform + whitelist</text><text x="897" y="188" text-anchor="middle" class="note">forbidNonWhitelisted</text>
+  <path d="M240 157H300" class="line"/><path d="M480 157H540" class="line"/><path d="M720 157H780" class="line"/>
+  <rect x="760" y="292" width="275" height="92" class="box" fill="#d3f9d8" stroke="#2b8a3e"/><text x="897" y="328" text-anchor="middle" class="label">Controller → Service</text><text x="897" y="354" text-anchor="middle" class="note">validated CreateNoteDto only</text>
+  <path d="M897 209V292" class="line"/><text x="911" y="256" class="small">valid</text>
+  <rect x="486" y="292" width="210" height="92" class="box" fill="#ffe3e3" stroke="#c92a2a"/><text x="591" y="328" text-anchor="middle" class="label">HttpExceptionFilter</text><text x="591" y="354" text-anchor="middle" class="note">consistent 400 response</text>
+  <path d="M780 181C735 222 694 251 631 292" class="line"/><text x="685" y="242" class="small">invalid / unknown</text>
+  <rect x="70" y="482" width="245" height="96" class="box" fill="#e5dbff" stroke="#7048e8"/><text x="192" y="518" text-anchor="middle" class="label">CreateNoteDto metadata</text><text x="192" y="544" text-anchor="middle" class="note">types, lengths, examples</text>
+  <rect x="414" y="482" width="245" height="96" class="box" fill="#d0ebff" stroke="#1971c2"/><text x="536" y="518" text-anchor="middle" class="label">OpenAPI Document</text><text x="536" y="544" text-anchor="middle" class="note">routes, schemas, security</text>
+  <rect x="758" y="482" width="245" height="96" class="box" fill="#dbe4ff" stroke="#4c6ef5"/><text x="880" y="518" text-anchor="middle" class="label">Swagger UI / Client</text><text x="880" y="544" text-anchor="middle" class="note">inspect and call contract</text>
+  <path d="M315 530H414" class="line"/><path d="M659 530H758" class="line"/>
+  <text x="48" y="622" class="note">Boundary: Swagger describes, ValidationPipe enforces, and the Guard authorizes. None replaces another.</text>
+</svg>

@@ -1,0 +1,23 @@
+schema: spec-driven
+
+context: |
+  This repository is a five-day, fifteen-lesson NestJS learning knowledge base for experienced TypeScript/frontend engineers moving toward senior full-stack work.
+  lessons/README.md is the primary course outline. README.md and AGENTS.md define repository-wide constraints.
+  Every lesson contains synchronized Chinese and English learning documents plus a complete, independently runnable cumulative NestJS demo.
+  Demos use NestJS 11, TypeScript strict mode, npm workspaces, Jest, ESLint, TypeORM/sql.js, and optional Redis/BullMQ fallbacks where relevant.
+  Complex technical flows require editable SVG diagrams created with the repository baoyu-diagram skill.
+  A lesson is complete only after lint, build, documented local-run verification, and a fresh project reviewer agent return REVIEW PASS. Only lesson 13 contains and runs automated tests.
+
+rules:
+  proposal:
+    - Treat all fifteen lessons as one coordinated course change while preserving per-lesson completion gates.
+    - State explicitly that unrelated pre-existing user changes must be preserved.
+  specs:
+    - Define testable requirements for course coverage, bilingual consistency, cumulative demos, diagrams, verification, and reviewer gates.
+    - Use Given/When/Then scenarios.
+  design:
+    - Explain the per-lesson implementation and review loop and how cumulative changes propagate to later demos.
+    - Include a strategy for keeping the work executable within the 60–90 minute scope of each lesson.
+  tasks:
+    - Use checklist items and create a separate implementation and reviewer checkpoint for every lesson.
+    - Include final whole-repository verification and OpenSpec verification, sync, and archive tasks.

@@ -1,0 +1,42 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3015:3015"
+    environment:
+      PORT: 3015
+      APP_PREFIX: api
+      DATABASE_PATH: /app/data/knowledge.sqlite
+      JWT_SECRET: change-this-production-secret
+      ADMIN_EMAIL: admin@example.com
+      ADMIN_PASSWORD: change-this-admin-password
+      CORS_ORIGINS: http://localhost:3000
+      REDIS_URL: redis://redis:6379
+      QUEUE_NAME: note-events
+    volumes:
+      - knowledge-data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3015/api/health/ready').then(r=>{if(!r.ok)process.exit(1)})",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  knowledge-data:

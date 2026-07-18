@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Observability path for the knowledge API</title>
+  <desc id="desc">Outer middleware assigns a correlation ID, observes the final response, and produces logs and metrics; health endpoints expose separate liveness and readiness signals.</desc>
+  <defs>
+    <style>text{font-family:'Comic Sans MS','Segoe Print',Arial,sans-serif;fill:#1b1b1f}.t{font-size:27px;font-weight:700}.h{font-size:18px;font-weight:700}.n{font-size:14px;fill:#495057}.box{stroke-width:2.2;rx:18}.arrow{fill:none;stroke:#495057;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#495057"/></marker>
+  </defs>
+  <rect width="1200" height="700" fill="#fff"/>
+  <text x="48" y="52" class="t">How one request becomes searchable, aggregate, and schedulable signals</text>
+  <rect x="55" y="120" width="185" height="112" fill="#d0ebff" stroke="#1971c2" class="box"/><text x="147" y="164" text-anchor="middle" class="h">HTTP request</text><text x="147" y="193" text-anchor="middle" class="n">May carry x-request-id</text>
+  <rect x="300" y="120" width="220" height="112" fill="#fff3bf" stroke="#f08c00" class="box"/><text x="410" y="157" text-anchor="middle" class="h">Request ID</text><text x="410" y="186" text-anchor="middle" class="n">Validate or create a UUID</text><text x="410" y="208" text-anchor="middle" class="n">Attach to request + response</text>
+  <rect x="580" y="120" width="220" height="112" fill="#d3f9d8" stroke="#2b8a3e" class="box"/><text x="690" y="164" text-anchor="middle" class="h">Controller / Service</text><text x="690" y="193" text-anchor="middle" class="n">Auth, business, database</text>
+  <rect x="860" y="120" width="265" height="112" fill="#e5dbff" stroke="#7048e8" class="box"/><text x="992" y="157" text-anchor="middle" class="h">Response finish event</text><text x="992" y="186" text-anchor="middle" class="n">Middleware records outcome</text><text x="992" y="208" text-anchor="middle" class="n">Covers Guard / Pipe / 404</text>
+  <path d="M240 176H300" class="arrow"/><path d="M520 176H580" class="arrow"/><path d="M800 176H860" class="arrow"/>
+  <rect x="705" y="332" width="210" height="118" fill="#ffe3e3" stroke="#e03131" class="box"/><text x="810" y="373" text-anchor="middle" class="h">Structured logs</text><text x="810" y="402" text-anchor="middle" class="n">Inspect one request</text><text x="810" y="425" text-anchor="middle" class="n">requestId · userId · path</text>
+  <rect x="955" y="332" width="210" height="118" fill="#d0ebff" stroke="#1971c2" class="box"/><text x="1060" y="373" text-anchor="middle" class="h">Prometheus metrics</text><text x="1060" y="402" text-anchor="middle" class="n">Observe aggregate trends</text><text x="1060" y="425" text-anchor="middle" class="n">requests · 5xx · duration</text>
+  <path d="M965 232C930 276 865 284 820 332" class="arrow"/><path d="M1020 232C1040 274 1052 292 1058 332" class="arrow"/>
+  <rect x="55" y="332" width="230" height="118" fill="#d3f9d8" stroke="#2b8a3e" class="box"/><text x="170" y="373" text-anchor="middle" class="h">/health/live</text><text x="170" y="402" text-anchor="middle" class="n">Can the process respond?</text><text x="170" y="425" text-anchor="middle" class="n">Failure → consider restart</text>
+  <rect x="345" y="332" width="280" height="118" fill="#fff3bf" stroke="#f08c00" class="box"/><text x="485" y="373" text-anchor="middle" class="h">/health/ready</text><text x="485" y="402" text-anchor="middle" class="n">Database + cache/queue mode</text><text x="485" y="425" text-anchor="middle" class="n">Failure → stop new traffic</text>
+  <path d="M690 232C625 278 310 275 170 332" class="arrow"/><path d="M690 232C640 275 555 291 500 332" class="arrow"/>
+  <rect x="90" y="535" width="1020" height="105" fill="#f8f9fa" stroke="#868e96" class="box"/><text x="600" y="574" text-anchor="middle" class="h">Production consumers</text><text x="600" y="607" text-anchor="middle" class="n">Log search · Prometheus and dashboards · Orchestrator scheduling · User-impact alerts</text>
+  <path d="M170 450V535M485 450V535M810 450V535M1060 450V535" class="arrow"/>
+</svg>

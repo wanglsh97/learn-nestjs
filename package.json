@@ -1,0 +1,16 @@
+{
+  "name": "learn-nestjs-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Workspace tooling for the cumulative NestJS lesson demos",
+  "author": "良升",
+  "license": "MIT",
+  "workspaces": [
+    "lessons/*/demo"
+  ],
+  "scripts": {
+    "build:lessons": "npm run build --workspaces --if-present",
+    "lint:lessons": "npm run lint --workspaces --if-present",
+    "test:lessons": "npm run test --workspaces --if-present"
+  }
+}
