@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">NestJS Module 边界与依赖关系</title>
+  <desc id="desc">NotesModule 封装 Controller、Service 和 Repository，只通过 exports 暴露 NotesService；AppModule 通过 imports 引入 NotesModule。</desc>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@400;500;600&amp;family=Patrick+Hand&amp;display=swap');
+      text { font-family: 'Patrick Hand', 'LXGW WenKai', 'Kaiti SC', 'KaiTi', sans-serif; fill: #1b1b1f; }
+      .title { font-size: 26px; font-weight: 600; }
+      .region-title { font-size: 19px; font-weight: 600; }
+      .component { font-size: 18px; font-weight: 600; }
+      .description { font-size: 14px; fill: #495057; }
+      .label { font-size: 13px; font-weight: 600; fill: #495057; }
+      .region { fill: #f8f9fa; stroke: #868e96; stroke-width: 2; stroke-dasharray: 8 7; }
+      .arrow { fill: none; stroke: #495057; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#495057"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="700" fill="#ffffff"/>
+  <text x="48" y="54" class="title">NestJS Module：封装内部实现，导出稳定 API</text>
+  <text x="48" y="82" class="description">imports 获得依赖 · providers/controllers 构成内部能力 · exports 定义 public API</text>
+
+  <rect x="50" y="255" width="220" height="116" rx="12" fill="#dbe4ff" stroke="#4c6ef5" stroke-width="2"/>
+  <text x="160" y="300" text-anchor="middle" class="component">AppModule</text>
+  <text x="160" y="329" text-anchor="middle" class="description">root composition</text>
+
+  <rect x="355" y="120" width="535" height="460" rx="16" class="region"/>
+  <text x="385" y="157" class="region-title">NotesModule</text>
+  <text x="385" y="181" class="description">Module boundary</text>
+
+  <rect x="410" y="225" width="190" height="90" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="2"/>
+  <text x="505" y="264" text-anchor="middle" class="component">NotesController</text>
+  <text x="505" y="290" text-anchor="middle" class="description">controllers</text>
+
+  <rect x="650" y="225" width="190" height="90" rx="12" fill="#d3f9d8" stroke="#2b8a3e" stroke-width="2"/>
+  <text x="745" y="264" text-anchor="middle" class="component">NotesService</text>
+  <text x="745" y="290" text-anchor="middle" class="description">providers + exports</text>
+
+  <rect x="650" y="405" width="190" height="90" rx="12" fill="#e5dbff" stroke="#7048e8" stroke-width="2"/>
+  <text x="745" y="444" text-anchor="middle" class="component">NotesRepository</text>
+  <text x="745" y="470" text-anchor="middle" class="description">internal provider</text>
+
+  <path d="M 600 270 L 650 270" class="arrow"/>
+  <text x="625" y="253" text-anchor="middle" class="label">inject</text>
+  <path d="M 745 315 L 745 405" class="arrow"/>
+  <text x="765" y="365" class="label">inject</text>
+
+  <path d="M 270 313 L 355 313" class="arrow"/>
+  <text x="312" y="294" text-anchor="middle" class="label">imports</text>
+
+  <rect x="965" y="255" width="190" height="116" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text x="1060" y="300" text-anchor="middle" class="component">ConsumerModule</text>
+  <text x="1060" y="329" text-anchor="middle" class="description">只能使用 exported API</text>
+
+  <path d="M 840 270 C 900 270, 910 313, 965 313" class="arrow"/>
+  <text x="902" y="257" text-anchor="middle" class="label">exports NotesService</text>
+
+  <path d="M 840 450 C 910 450, 910 390, 965 390" fill="none" stroke="#c92a2a" stroke-width="2" stroke-dasharray="7 6"/>
+  <line x1="920" y1="374" x2="944" y2="398" stroke="#c92a2a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="944" y1="374" x2="920" y2="398" stroke="#c92a2a" stroke-width="3" stroke-linecap="round"/>
+  <text x="902" y="472" text-anchor="middle" class="label" fill="#c92a2a">未导出，边界外不可注入</text>
+
+  <rect x="355" y="620" width="535" height="46" rx="10" fill="#f1f3f5" stroke="#868e96" stroke-width="1.5"/>
+  <text x="622" y="649" text-anchor="middle" class="description">exports 是 Module 的 public API；内部 Provider 默认保持封装</text>
+</svg>

@@ -37,7 +37,7 @@ curl http://localhost:3015/api/metrics
 docker compose ps
 ```
 
-预期 readiness 为 `status: "ok"`、database 为 `up`、cache 为 `redis`、queue 为 `up`，两个容器最终显示 healthy。
+预期就绪状态（readiness）为 `status: "ok"`、`database` 为 `up`、`cache` 为 `redis`、`queue` 为 `up`，两个容器最终显示 `healthy`。
 
 停止容器但保留数据：
 
@@ -57,7 +57,7 @@ curl -X POST http://localhost:3015/api/auth/login \
   -d '{"email":"admin@example.com","password":"change-this-admin-password"}'
 ```
 
-也可调用 `/api/auth/register` 创建普通用户，再通过 Bearer Token 操作 `/api/notes`。发布接口还要求 `idempotency-key`：
+也可调用 `/api/auth/register` 创建普通用户，再通过 Bearer 令牌操作 `/api/notes`。发布接口还要求 `idempotency-key`：
 
 ```bash
 curl -X POST http://localhost:3015/api/notes/<note-id>/publish \

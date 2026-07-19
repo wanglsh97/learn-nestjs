@@ -1,6 +1,6 @@
 # Lesson 05 Demo
 
-本课用 TypeORM Repository、Migration 和 SQL.js 文件数据库替换内存 `Map`，保留前四课全部源码。项目不包含测试用例。
+本课用 TypeORM 仓储（Repository）、迁移（Migration）和 SQL.js 文件数据库替换内存 `Map`，保留前四课全部源码。项目不包含测试用例。
 
 ## 启动
 
@@ -10,7 +10,7 @@ cp .env.example .env
 npm run start:dev
 ```
 
-默认 API 为 `http://localhost:3005/api`，Swagger UI 为 `http://localhost:3005/docs`。首次启动会运行初始 Migration，并在当前目录创建 `lesson-05.sqlite`。
+默认 API 为 `http://localhost:3005/api`，Swagger UI 为 `http://localhost:3005/docs`。首次启动会运行初始迁移，并在当前目录创建 `lesson-05.sqlite`。
 
 ## 演示持久化
 

@@ -25,7 +25,7 @@ npm run start:dev
 curl -i http://localhost:3004/api/notes
 ```
 
-创建合法笔记；响应为 `201`，字段首尾空格已被 Pipe 去除：
+创建合法笔记；响应为 `201`，字段首尾空格已被管道（Pipe）去除：
 
 ```bash
 curl -i -X POST http://localhost:3004/api/notes \

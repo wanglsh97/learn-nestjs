@@ -27,7 +27,7 @@ export const Roles = (...roles: UserRole[]) =>
 remove(...) { ... }
 ```
 
-`RolesGuard` uses `Reflector.getAllAndOverride()` across handler and Controller metadata. No role metadata means no additional role restriction. When roles are present, it checks the `request.user` established by `JwtAuthGuard`:
+`RolesGuard` uses `Reflector.getAllAndOverride()` to read handler and Controller metadata in order, so handler-level configuration overrides Controller-level configuration. No role metadata means no additional role restriction. When roles are present, it checks the `request.user` established by `JwtAuthGuard`:
 
 ```ts
 const requiredRoles = this.reflector.getAllAndOverride<UserRole[]>(

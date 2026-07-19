@@ -1,6 +1,6 @@
 # Lesson 02 Demo
 
-在第 01 课基础上增加 Notes 功能模块、Provider、跨模块导出和构造函数注入。`ClockService` 由 `ClockModule` 导出，`NotesService` 通过构造函数使用它。
+在第 01 课基础上增加 Notes 功能模块、提供者（Provider）、跨模块导出和构造函数注入。`ClockService` 由 `ClockModule` 导出，`NotesService` 通过构造函数使用它。
 
 ## 启动与演示
 

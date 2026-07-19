@@ -40,11 +40,11 @@
   <text x="385" y="380" class="label" text-anchor="middle">NotesService</text>
   <text x="385" y="404" class="desc" text-anchor="middle">业务与内存状态</text>
   <path class="inject" d="M320 386 L290 386"/>
-  <text x="305" y="340" class="desc" text-anchor="middle">NotesService 注入 Controller</text>
+  <text x="305" y="340" class="desc" text-anchor="middle">向控制器注入 NotesService</text>
 
   <rect x="170" y="454" width="270" height="64" rx="10" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
   <text x="305" y="481" class="label" text-anchor="middle">imports: [ClockModule]</text>
-  <text x="305" y="503" class="desc" text-anchor="middle">获得对方导出的 Token</text>
+  <text x="305" y="503" class="desc" text-anchor="middle">获得对方导出的注入令牌</text>
 
   <rect x="650" y="286" width="310" height="260" rx="16" fill="#ffffff" stroke="#7048e8" stroke-width="2" stroke-dasharray="8 6"/>
   <text x="672" y="318" class="label">ClockModule</text>
@@ -52,11 +52,11 @@
   <text x="564" y="289" class="desc" text-anchor="middle">imports ClockModule</text>
   <rect x="700" y="350" width="210" height="72" rx="10" fill="#e5dbff" stroke="#7048e8" stroke-width="2"/>
   <text x="805" y="380" class="label" text-anchor="middle">ClockService</text>
-  <text x="805" y="404" class="desc" text-anchor="middle">Provider · 默认单例</text>
+  <text x="805" y="404" class="desc" text-anchor="middle">提供者 · 默认单例</text>
   <rect x="700" y="454" width="210" height="64" rx="10" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
   <text x="805" y="481" class="label" text-anchor="middle">exports: [ClockService]</text>
   <text x="805" y="503" class="desc" text-anchor="middle">公开能力，不公开全部内部</text>
 
   <path class="inject" d="M700 386 C610 386 545 416 450 386"/>
-  <text x="575" y="369" class="desc" text-anchor="middle">容器按 Token 注入</text>
+  <text x="575" y="369" class="desc" text-anchor="middle">容器按注入令牌注入</text>
 </svg>

@@ -68,7 +68,7 @@ export class ApiKeyGuard implements CanActivate {
 
 `@UseGuards(ApiKeyGuard)` protects only creation; listing notes remains public. JWT authentication arrives in Lesson 07 and RBAC in Lesson 08. Here the concern is the Guard's place in the chain.
 
-## Interceptor: wrapping the handler
+## Interceptor: observing before and after handler execution
 
 An Interceptor resembles an HTTP-client interceptor or a function wrapper: it has an entry phase and can observe the return phase with RxJS operators.
 
@@ -181,7 +181,7 @@ This source-only Demo has no test cases; the two requests above are the repeatab
 - work for every request near raw HTTP: Middleware;
 - whether a Handler may run: Guard;
 - transform or validate one argument: Pipe;
-- wrap the Handler before and after: Interceptor;
+- observe or transform the process before and after Handler execution: Interceptor;
 - map an exception to a response: Exception Filter;
 - business rules after protocol adaptation: Service.
 

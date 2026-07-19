@@ -69,6 +69,44 @@ npm run test:e2e --workspace lesson-13-testing-demo
 - 不提交 `node_modules/`、`dist/`、`coverage/`、数据库文件或运行日志。
 - 中文与英文课程文档保持相同结构和含义；复杂流程统一使用课程目录中的 SVG 图示。
 
+## 术语约定
+
+中文课程首次引入核心概念时使用“中文术语（English Term）”，后续使用中文术语；源码中的类名、装饰器和 API 名称保持原样。
+
+| English term | 中文术语 |
+| --- | --- |
+| Module | 模块 |
+| Controller | 控制器 |
+| Provider | 提供者 |
+| Service | 服务 |
+| Middleware | 中间件 |
+| Guard | 守卫 |
+| Interceptor | 拦截器 |
+| Pipe | 管道 |
+| Exception Filter | 异常过滤器 |
+| Handler | 路由处理器 |
+| Execution Context | 执行上下文 |
+| Injection Token | 注入令牌 |
+| Scope | 作用域 |
+| Lifecycle Hook | 生命周期钩子 |
+| Custom Decorator | 自定义装饰器 |
+| Strategy | 策略 |
+| Entity | 实体 |
+| Repository | 仓储 |
+| Migration | 迁移 |
+| Worker | 工作进程 |
+| Queue | 队列 |
+| Job ID | 任务 ID |
+| Payload | 任务载荷 |
+| Cache-Aside | 旁路缓存 |
+| Cache Key | 缓存键 |
+| Transactional Outbox | 事务发件箱 |
+| Liveness Check | 存活检查 |
+| Readiness Check | 就绪检查 |
+| Startup Probe | 启动探针 |
+| Termination Grace Period | 终止宽限期 |
+| Expand/Contract | 扩展/收缩 |
+
 ## 参考资料
 
 - [NestJS 官方文档](https://docs.nestjs.com/)

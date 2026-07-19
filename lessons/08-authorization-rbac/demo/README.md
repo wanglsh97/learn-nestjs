@@ -14,7 +14,7 @@ npm run start:dev
 
 ## 演示
 
-注册普通用户、复制其 Token，并创建一条笔记。随后登录管理员：
+注册普通用户、复制其令牌，并创建一条笔记。随后登录管理员：
 
 ```bash
 curl -i -X POST http://localhost:3008/api/auth/login \
@@ -22,7 +22,7 @@ curl -i -X POST http://localhost:3008/api/auth/login \
   -d '{"email":"admin@example.com","password":"admin-password"}'
 ```
 
-把 `<id>` 和 Token 替换为实际值：
+把 `<id>` 和令牌替换为实际值：
 
 ```bash
 curl -i -X DELETE http://localhost:3008/api/notes/<id> \

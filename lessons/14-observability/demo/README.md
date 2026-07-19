@@ -28,7 +28,7 @@ curl -i http://localhost:3014/api/health/live \
   -H 'x-request-id: local-observe-001'
 ```
 
-响应预期为 `200`，响应头回显 `x-request-id: local-observe-001`。终端会输出一条 JSON 请求日志，包含相同的 `requestId`、`method`、`path`、`statusCode` 和 `durationMs`。认证请求还会包含 `userId`，但不会记录 Token、请求体或查询串。
+响应预期为 `200`，响应头回显 `x-request-id: local-observe-001`。终端会输出一条 JSON 请求日志，包含相同的 `requestId`、`method`、`path`、`statusCode` 和 `durationMs`。认证请求还会包含 `userId`，但不会记录令牌、请求体或查询串。
 
 无效或超过 128 字符的 Request ID 不会被沿用，响应会返回服务器生成的 UUID。
 
@@ -74,7 +74,7 @@ curl -X POST http://localhost:3014/api/auth/login \
   -d '{"email":"admin@example.com","password":"admin-password"}'
 ```
 
-发布笔记需要 Bearer Token 和幂等键：
+发布笔记需要 Bearer 令牌和幂等键：
 
 ```bash
 curl -X POST http://localhost:3014/api/notes/<note-id>/publish \

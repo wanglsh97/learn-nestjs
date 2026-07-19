@@ -1,6 +1,6 @@
 # Lesson 07 Demo
 
-本课加入用户注册、bcrypt 密码哈希、JWT 登录、Passport Strategy、当前用户装饰器和 Notes 所有权隔离。项目不包含测试用例。
+本课加入用户注册、bcrypt 密码哈希、JWT 登录、Passport 策略（Strategy）、当前用户装饰器和 Notes 所有权隔离。项目不包含测试用例。
 
 ## 启动
 
@@ -39,7 +39,7 @@ curl -i http://localhost:3007/api/notes \
   -H 'authorization: Bearer <access-token>'
 ```
 
-省略或篡改 Token 返回 `401`。重复注册同一邮箱返回 `409`。使用第二个账号查询时不会看到第一个账号的笔记。
+省略或篡改令牌会返回 `401`。重复注册同一邮箱返回 `409`。使用第二个账号查询时不会看到第一个账号的笔记。
 
 ## 验证与边界
 

@@ -71,7 +71,7 @@ await request(app.getHttpServer())
   .expect(401);
 ```
 
-Scenarios cover registration and ownership, anonymous access, publish replay/key conflict, cross-user 404, and regular-user delete 403. Every `it` creates its own users and Notes instead of depending on a token or ID from a previous test.
+Scenarios cover registration and ownership, anonymous access, publish replay/key conflict, cross-user 404, and regular-user delete 403. Every `it` that needs data creates its own users and Notes instead of depending on a token or ID from another test.
 
 `test/setup-env.ts` sets a unique temporary database, test JWT secret, and empty Redis URL before module loading, keeping E2E independent from Docker. Teardown closes the application and removes the database file.
 

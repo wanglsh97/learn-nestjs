@@ -22,9 +22,9 @@
   <path d="M 630 510 L 630 555 L 460 555" fill="none" stroke="#495057" stroke-width="1.8"/>
   <path d="M 250 180 C 80 260, 80 470, 230 485" fill="none" stroke="#d9480f" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#arrow-orange)"/><text x="88" y="340" fill="#d9480f" font-size="12">必要时访问原生 API</text>
 
-  <rect x="110" y="130" width="220" height="80" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="1.8"/><text x="220" y="163" font-size="18" font-weight="600" text-anchor="middle">Controller</text><text x="220" y="188" fill="#495057" font-size="14" text-anchor="middle">HTTP 输入与输出</text>
-  <rect x="350" y="130" width="220" height="80" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="1.8"/><text x="460" y="163" font-size="18" font-weight="600" text-anchor="middle">Module</text><text x="460" y="188" fill="#495057" font-size="14" text-anchor="middle">组织功能边界</text>
-  <rect x="590" y="130" width="220" height="80" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="1.8"/><text x="700" y="163" font-size="18" font-weight="600" text-anchor="middle">Provider</text><text x="700" y="188" fill="#495057" font-size="14" text-anchor="middle">业务逻辑与依赖</text>
+  <rect x="110" y="130" width="220" height="80" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="1.8"/><text x="220" y="163" font-size="18" font-weight="600" text-anchor="middle">控制器</text><text x="220" y="188" fill="#495057" font-size="14" text-anchor="middle">HTTP 输入与输出</text>
+  <rect x="350" y="130" width="220" height="80" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="1.8"/><text x="460" y="163" font-size="18" font-weight="600" text-anchor="middle">模块</text><text x="460" y="188" fill="#495057" font-size="14" text-anchor="middle">组织功能边界</text>
+  <rect x="590" y="130" width="220" height="80" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="1.8"/><text x="700" y="163" font-size="18" font-weight="600" text-anchor="middle">提供者</text><text x="700" y="188" fill="#495057" font-size="14" text-anchor="middle">业务逻辑与依赖</text>
 
   <rect x="230" y="320" width="460" height="50" rx="12" fill="#d3f9d8" stroke="#2b8a3e" stroke-width="1.8"/><text x="460" y="342" font-size="18" font-weight="600" text-anchor="middle">NestJS Application API</text><text x="460" y="360" fill="#495057" font-size="14" text-anchor="middle">装饰器 · 元数据 · 依赖注入 · 生命周期</text>
 

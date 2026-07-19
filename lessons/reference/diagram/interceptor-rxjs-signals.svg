@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 760" role="img" aria-labelledby="title desc">
+  <title id="title">Interceptor 中的 RxJS signal pipeline</title>
+  <desc id="desc">next.handle 返回 Observable，成功值进入 map 或 tap，错误进入 catchError，三种结束方式最终进入 finalize。</desc>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@400;500;600&amp;family=Patrick+Hand&amp;display=swap');
+      text { font-family: 'Patrick Hand', 'LXGW WenKai', 'Kaiti SC', 'KaiTi', sans-serif; fill: #1b1b1f; }
+      .title { font-size: 26px; font-weight: 600; }
+      .component { font-size: 18px; font-weight: 600; }
+      .description { font-size: 14px; fill: #495057; }
+      .label { font-size: 13px; font-weight: 600; }
+      .arrow { fill: none; stroke: #495057; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#495057"/>
+    </marker>
+  </defs>
+
+  <rect width="1120" height="760" fill="#ffffff"/>
+  <text x="48" y="54" class="title">为什么 Interceptor 使用 RxJS？</text>
+  <text x="48" y="82" class="description">Observable 把 Handler 的 value、error、complete/cancel 统一成可组合的 signal pipeline</text>
+
+  <rect x="430" y="115" width="260" height="72" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="2"/>
+  <text x="560" y="146" text-anchor="middle" class="component">next.handle()</text>
+  <text x="560" y="170" text-anchor="middle" class="description">进入后续 Pipe 与 Handler</text>
+
+  <path d="M 560 187 L 560 238" class="arrow"/>
+
+  <rect x="410" y="240" width="300" height="78" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text x="560" y="272" text-anchor="middle" class="component">Observable&lt;T&gt;</text>
+  <text x="560" y="297" text-anchor="middle" class="description">Nest 订阅并驱动 signal</text>
+
+  <path d="M 510 318 C 500 360, 315 360, 280 404" class="arrow"/>
+  <path d="M 610 318 C 620 360, 805 360, 840 404" class="arrow"/>
+  <text x="390" y="356" text-anchor="middle" class="label" fill="#2b8a3e">next(value)</text>
+  <text x="730" y="356" text-anchor="middle" class="label" fill="#c92a2a">error(error)</text>
+
+  <rect x="140" y="405" width="280" height="92" rx="12" fill="#d3f9d8" stroke="#2b8a3e" stroke-width="2"/>
+  <text x="280" y="441" text-anchor="middle" class="component">map() / tap()</text>
+  <text x="280" y="468" text-anchor="middle" class="description">改写成功值 / 只观察成功值</text>
+
+  <rect x="700" y="405" width="280" height="92" rx="12" fill="#ffe3e3" stroke="#c92a2a" stroke-width="2"/>
+  <text x="840" y="441" text-anchor="middle" class="component">catchError()</text>
+  <text x="840" y="468" text-anchor="middle" class="description">映射、恢复或重新抛出 error</text>
+
+  <path d="M 280 497 C 280 555, 470 555, 500 589" class="arrow"/>
+  <path d="M 840 497 C 840 555, 650 555, 620 589" class="arrow"/>
+
+  <rect x="420" y="590" width="280" height="90" rx="12" fill="#e5dbff" stroke="#7048e8" stroke-width="2"/>
+  <text x="560" y="627" text-anchor="middle" class="component">finalize()</text>
+  <text x="560" y="653" text-anchor="middle" class="description">成功、失败或取消都执行</text>
+
+  <path d="M 560 680 L 560 718" class="arrow"/>
+  <rect x="450" y="716" width="220" height="34" rx="17" fill="#dbe4ff" stroke="#4c6ef5" stroke-width="2"/>
+  <text x="560" y="739" text-anchor="middle" class="label">HTTP response / Exception Filter</text>
+
+  <rect x="48" y="590" width="290" height="90" rx="12" fill="#f1f3f5" stroke="#495057" stroke-width="1.5"/>
+  <text x="193" y="624" text-anchor="middle" class="component">short-circuit</text>
+  <text x="193" y="650" text-anchor="middle" class="description">return of(cachedValue)</text>
+  <text x="193" y="670" text-anchor="middle" class="description">不调用 next.handle()</text>
+</svg>

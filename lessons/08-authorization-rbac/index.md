@@ -14,7 +14,7 @@ RBAC 根据角色判断动作权限，例如只有 `admin` 可以删除；资源
 
 只检查角色会造成“任意已登录用户可访问任意资源”；只检查 owner 又难以表达管理员、审核员等跨资源权限。
 
-## 装饰器声明策略，Guard 执行策略
+## 装饰器声明策略，守卫（Guard）执行策略
 
 `@Roles()` 只把所需角色写入路由元数据：
 
@@ -27,7 +27,7 @@ export const Roles = (...roles: UserRole[]) =>
 remove(...) { ... }
 ```
 
-`RolesGuard` 使用 `Reflector.getAllAndOverride()` 合并方法与 Controller 元数据。没有声明角色时它不额外限制；声明角色时，它检查上一层 `JwtAuthGuard` 写入的 `request.user`：
+`RolesGuard` 使用 `Reflector.getAllAndOverride()` 按方法、控制器（Controller）的顺序读取元数据，方法级配置优先覆盖控制器级配置。没有声明角色时它不额外限制；声明角色时，它检查上一层 `JwtAuthGuard` 写入的 `request.user`：
 
 ```ts
 const requiredRoles = this.reflector.getAllAndOverride<UserRole[]>(
@@ -40,11 +40,11 @@ if (!request.user || !requiredRoles.includes(request.user.role)) {
 }
 ```
 
-Guard 顺序很重要：`@UseGuards(JwtAuthGuard, RolesGuard)` 先完成认证，再执行角色判断。缺少或无效 Token 返回 `401`；身份有效但角色不足返回 `403`。
+守卫顺序很重要：`@UseGuards(JwtAuthGuard, RolesGuard)` 先完成认证，再执行角色判断。缺少或无效令牌返回 `401`；身份有效但角色不足返回 `403`。
 
-## 资源所有权在 Service 查询中落实
+## 资源所有权在服务（Service）查询中落实
 
-角色 Guard 只能看到路由元数据，无法自动理解某条 Note 属于谁。Service 必须把用户上下文带进查询：
+角色守卫只能看到路由元数据，无法自动理解某条 Note 属于谁。服务必须把用户上下文带进查询：
 
 ```ts
 const note = await this.notes.findOneBy({ id });
@@ -79,7 +79,7 @@ curl -X POST http://localhost:3008/api/auth/login \
   -d '{"email":"admin@example.com","password":"admin-password"}'
 ```
 
-分别保存普通用户 Token、管理员 Token 和 Note ID：
+分别保存普通用户令牌、管理员令牌和 Note ID：
 
 ```bash
 # 普通用户删除：403
@@ -95,13 +95,13 @@ curl -i -X DELETE http://localhost:3008/api/notes/<id> \
   -H 'authorization: Bearer <admin-token>'
 ```
 
-再注册第二个普通用户，用其 Token 读取第一个用户的 Note，会得到 `404`。
+再注册第二个普通用户，用其令牌读取第一个用户的 Note，会得到 `404`。
 
 ## 工程取舍与易错点
 
-- `@Roles()` 是声明，不是保护；必须确保对应 Guard 实际挂载。
+- `@Roles()` 是声明，不是保护；必须确保对应守卫实际挂载。
 - 不接受客户端提交 `role`，角色变更必须是受保护且可审计的操作。
-- 仅在 Controller 隐藏按钮或字段不是授权，Service/Repository 查询必须约束资源。
+- 仅在客户端隐藏按钮或字段不是授权，服务/仓储（Repository）查询必须约束资源。
 - 角色适合粗粒度权限；组织、项目成员关系或 ABAC 条件需要独立策略层。
 - 高权限账号的默认密码和自动种子不能直接照搬到生产环境。
 

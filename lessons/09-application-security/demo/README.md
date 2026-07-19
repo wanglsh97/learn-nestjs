@@ -20,7 +20,7 @@ curl -i http://localhost:3009/api/health -H 'Origin: http://localhost:3000'
 curl -i http://localhost:3009/api/health -H 'Origin: https://untrusted.example'
 ```
 
-第一条能看到 Helmet Header；允许来源获得 `Access-Control-Allow-Origin`，未允许来源不会获得该响应头。
+第一条能看到 Helmet 响应头；允许来源获得 `Access-Control-Allow-Origin`，未允许来源不会获得该响应头。
 
 ## 观察认证限流
 

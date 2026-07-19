@@ -1,6 +1,6 @@
 # Lesson 11 Demo
 
-本课加入 Cache-Aside、TTL、写后失效，以及 Redis 不可用时的内存降级。项目不包含测试用例。
+本课加入旁路缓存（Cache-Aside）、TTL、写后失效，以及 Redis 不可用时的内存降级。项目不包含测试用例。
 
 ## 内存降级启动
 
@@ -10,7 +10,7 @@ cp .env.example .env
 REDIS_URL= npm run start:dev
 ```
 
-登录后连续请求两次相同的 `GET /api/notes`，终端依次显示 cache miss 和 hit。创建或更新 Note 后再次查询会 miss，证明写后失效。
+登录后连续请求两次相同的 `GET /api/notes`，终端依次显示缓存未命中和命中。创建或更新 Note 后再次查询会重新显示未命中，证明写后失效。
 
 ## Redis 启动
 

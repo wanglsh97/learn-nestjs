@@ -1,6 +1,6 @@
 # Lesson 13 Demo
 
-本课是课程中唯一保留测试代码的 Demo，包含纯配置与 Guard 单元测试、AuthService + SQL.js/JWT 集成测试，以及完整 HTTP E2E。
+本课是课程中唯一保留测试代码的 Demo，包含纯配置与守卫（Guard）单元测试、AuthService + SQL.js/JWT 集成测试，以及完整 HTTP E2E。
 
 ## 静态验证与测试
 
@@ -16,7 +16,7 @@ npm run test:e2e
 
 ## E2E 环境
 
-`test/setup-env.ts` 在导入 AppModule 前设置测试 JWT 密钥和位于系统临时目录的 SQL.js 文件。每个 E2E 场景创建自己的用户和 Note，结束时关闭 Nest 应用并删除数据库。
+`test/setup-env.ts` 在导入 AppModule 前设置测试 JWT 密钥和位于系统临时目录的 SQL.js 文件。每个需要数据的 E2E 场景都创建自己的用户和 Note，不依赖其他场景留下的数据；结束时关闭 Nest 应用并删除数据库。
 
 ## 手工运行
 

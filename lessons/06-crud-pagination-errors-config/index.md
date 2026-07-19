@@ -43,7 +43,7 @@ export class ListNotesQueryDto {
 
 ## 分页查询返回数据和元信息
 
-Service 用 QueryBuilder 组合可选条件，并参数化搜索值：
+服务（Service）用 QueryBuilder 组合可选条件，并参数化搜索值：
 
 ```ts
 const [items, total] = await builder
@@ -59,7 +59,7 @@ return { items, total, page: query.page, pageSize: query.pageSize };
 
 ## 业务缺失应转换为 HTTP 异常
 
-Repository 找不到记录只会返回 `null`。Service 把它提升为领域可理解的失败：
+仓储（Repository）找不到记录只会返回 `null`。服务把它提升为领域可理解的失败：
 
 ```ts
 async findOne(id: string): Promise<Note> {
@@ -71,7 +71,7 @@ async findOne(id: string): Promise<Note> {
 }
 ```
 
-全局 `HttpExceptionFilter` 从 `exception.getResponse()` 保留字符串或校验消息数组，并统一加入 `statusCode`、`path` 和 `timestamp`。Filter 负责响应形状，Service 负责选择异常语义；不要在每个 Controller 重复 `try/catch`。
+全局 `HttpExceptionFilter` 从 `exception.getResponse()` 保留字符串或校验消息数组，并统一加入 `statusCode`、`path` 和 `timestamp`。异常过滤器（Exception Filter）负责响应形状，服务负责选择异常语义；不要在每个控制器（Controller）重复 `try/catch`。
 
 ## 配置也属于外部输入
 
@@ -112,7 +112,7 @@ curl -i -X DELETE http://localhost:3006/api/notes/<id> \
 ## 工程取舍与易错点
 
 - 不要把分页参数留成隐式字符串，否则减法可能“碰巧可用”，无效输入却绕过边界。
-- `Object.assign` 只接受经过白名单校验的 DTO；不要把原始 Body 合并进 Entity。
+- `Object.assign` 只接受经过白名单校验的 DTO；不要把原始请求体（Body）合并进实体（Entity）。
 - offset 分页不是通用最优解，应按数据规模和一致性需求选择。
 - `404`、`400`、`401` 表达不同失败，不能统一返回 `200` 再塞业务错误码。
 - 配置默认值应集中在验证函数或配置工厂中，避免各消费方出现不同默认值。

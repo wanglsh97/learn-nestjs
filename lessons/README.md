@@ -5,7 +5,7 @@
 ## 第 1 天：NestJS 核心
 
 1. [NestJS 架构与启动流程](01-nestjs-architecture/index.md) — [Demo](01-nestjs-architecture/demo/README.md)
-2. [模块与依赖注入](02-modules-and-dependency-injection/index.md) — [Demo](02-modules-and-dependency-injection/demo/README.md)
+2. [Module 与 Dependency Injection (DI)](02-modules-and-dependency-injection/index.md) — [Demo](02-modules-and-dependency-injection/demo/README.md)
 3. [请求生命周期](03-request-lifecycle/index.md) — [Demo](03-request-lifecycle/demo/README.md)
 
 ## 第 2 天：API 与数据
@@ -33,6 +33,10 @@
 15. [部署与 CI/CD](15-deployment-and-cicd/index.md) — [Demo](15-deployment-and-cicd/demo/README.md)
 
 英文版本位于每个课程目录中的 `index.en.md`。
+
+## 核心能力参考
+
+[NestJS 核心能力参考](reference/README.md)集中整理 Module、Controller、Provider、Decorator、Middleware、Guard、Interceptor、Pipe 和 Exception Filter 的职责、注册方式与最小代码示例。它用于开发时快速查阅，不替代按顺序学习课程和运行 Demo。
 
 ## 运行方式
 

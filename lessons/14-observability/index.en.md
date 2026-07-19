@@ -46,7 +46,7 @@ The character and length limits matter: unconstrained external values can corrup
 
 Stable fields can be indexed and aggregated by a log backend. The Demo deliberately uses `request.path` rather than a query string that may contain secrets. It does not record Authorization, cookies, passwords, tokens, or request bodies. If production diagnostics need business fields, use an allowlist and centralized redaction instead of logging everything first.
 
-Middleware is also an execution-order decision. A Guard, Pipe, or route match can produce a 401, 400, or 404 before an interceptor runs. The outer middleware observes the final response, so “total requests” includes those failures. Its listener only observes completion and never writes the response again.
+Middleware is also an execution-order decision. A Guard rejection or an unmatched route can produce a 401 or 404 before an interceptor runs. When a Pipe produces a 400, the interceptor's pre-handler logic has already run, but whether it records the failure still depends on how it handles the Observable's error path. The outer middleware observes the final response, so “total requests” reliably includes all of these failures. Its listener only observes completion and never writes the response again.
 
 Nest's `Logger` is enough to demonstrate structured context. Production systems commonly switch to a logger with JSON output, levels, asynchronous transport, and redaction. Configure levels per environment: `debug` locally, `info` by default in production, and elevated detail only for a controlled window.
 
