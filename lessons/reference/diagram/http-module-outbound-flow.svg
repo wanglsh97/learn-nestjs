@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 760" role="img" aria-labelledby="title desc">
+  <title id="title">HttpModule outbound request flow</title>
+  <desc id="desc">Gateway 通过 HttpService 调用 downstream service，成功时映射 response，临时错误有限重试，最终错误映射为 application exception。</desc>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@400;500;600&amp;family=Patrick+Hand&amp;display=swap');
+      text { font-family: 'Patrick Hand', 'LXGW WenKai', 'Kaiti SC', 'KaiTi', sans-serif; fill: #1b1b1f; }
+      .title { font-size: 24px; font-weight: 600; }
+      .node { font-size: 18px; font-weight: 600; }
+      .desc { font-size: 14px; fill: #495057; }
+      .label { font-size: 13px; fill: #495057; }
+      .box { stroke-width: 2; }
+      .line { fill: none; stroke: #495057; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+      .error { fill: none; stroke: #c92a2a; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow-red); }
+      .retry { fill: none; stroke: #e67700; stroke-width: 2; stroke-dasharray: 7 6; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow-orange); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#495057"/></marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#c92a2a"/></marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#e67700"/></marker>
+  </defs>
+  <rect x="1" y="1" width="1118" height="758" rx="16" fill="#fff" stroke="#e9ecef"/>
+  <text x="42" y="48" class="title">HttpModule：outbound request 的成功、retry 与失败路径</text>
+  <text x="42" y="74" class="desc">整体 deadline 有限；只有临时错误和安全 operation 才进入 retry。</text>
+
+  <rect x="410" y="105" width="300" height="74" rx="37" fill="#dbe4ff" stroke="#4c6ef5" class="box"/>
+  <text x="560" y="137" text-anchor="middle" class="node">Gateway method</text>
+  <text x="560" y="160" text-anchor="middle" class="desc">校验 input / 组装 request</text>
+  <path d="M560 179 V238" class="line"/>
+
+  <rect x="410" y="238" width="300" height="86" rx="12" fill="#d0ebff" stroke="#1971c2" class="box"/>
+  <text x="560" y="272" text-anchor="middle" class="node">HttpService / Axios</text>
+  <text x="560" y="297" text-anchor="middle" class="desc">baseURL · timeout · AbortSignal</text>
+  <path d="M560 324 V383" class="line"/>
+
+  <path d="M560 383 L670 448 L560 513 L450 448 Z" fill="#ffec99" stroke="#e67700" class="box"/>
+  <text x="560" y="441" text-anchor="middle" class="node">Downstream 结果？</text>
+  <text x="560" y="466" text-anchor="middle" class="desc">response / network error</text>
+
+  <path d="M450 448 H282" class="line"/>
+  <text x="368" y="431" text-anchor="middle" class="label">2xx / accepted status</text>
+  <rect x="62" y="408" width="220" height="80" rx="12" fill="#d3f9d8" stroke="#2b8a3e" class="box"/>
+  <text x="172" y="440" text-anchor="middle" class="node">Map + validate</text>
+  <text x="172" y="465" text-anchor="middle" class="desc">AxiosResponse → domain data</text>
+  <path d="M172 488 V574" class="line"/>
+
+  <path d="M670 448 H838" class="error"/>
+  <text x="754" y="431" text-anchor="middle" class="label">error</text>
+  <path d="M838 383 L948 448 L838 513 L728 448 Z" fill="#ffe3e3" stroke="#c92a2a" class="box"/>
+  <text x="838" y="441" text-anchor="middle" class="node">允许 retry？</text>
+  <text x="838" y="466" text-anchor="middle" class="desc">幂等 · 临时错误 · 次数未耗尽</text>
+
+  <path d="M838 383 C838 270 760 254 710 276" class="retry"/>
+  <text x="817" y="307" text-anchor="middle" class="label">是：backoff + jitter</text>
+
+  <path d="M838 513 V574" class="error"/>
+  <text x="857" y="548" class="label">否</text>
+  <rect x="728" y="574" width="220" height="82" rx="12" fill="#ffe3e3" stroke="#c92a2a" class="box"/>
+  <text x="838" y="607" text-anchor="middle" class="node">Map exception</text>
+  <text x="838" y="632" text-anchor="middle" class="desc">502 / 503 / 504</text>
+
+  <rect x="62" y="574" width="220" height="82" rx="12" fill="#d3f9d8" stroke="#2b8a3e" class="box"/>
+  <text x="172" y="607" text-anchor="middle" class="node">Return domain data</text>
+  <text x="172" y="632" text-anchor="middle" class="desc">不泄漏 Axios detail</text>
+
+  <rect x="342" y="690" width="436" height="42" rx="21" fill="#f1f3f5" stroke="#495057" stroke-width="1.5"/>
+  <text x="560" y="716" text-anchor="middle" class="desc">记录 duration / status / retry count；不记录 token 与敏感 body</text>
+</svg>

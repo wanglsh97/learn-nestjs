@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">ConfigModule 配置加载与校验流程</title>
+  <desc id="desc">多个 env file 按顺序加载，runtime environment 具有更高优先级，合并后的 environment 经过 validation；custom configuration factory 需要自行校验，两条路径最终进入 ConfigService 或 typed namespace Provider。</desc>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@400;500;600&amp;family=Patrick+Hand&amp;display=swap');
+      text { font-family: 'Patrick Hand', 'LXGW WenKai', 'Kaiti SC', 'KaiTi', sans-serif; fill: #1b1b1f; }
+      .title { font-size: 26px; font-weight: 600; }
+      .component { font-size: 18px; font-weight: 600; }
+      .description { font-size: 14px; fill: #495057; }
+      .label { font-size: 13px; font-weight: 600; fill: #495057; }
+      .arrow { fill: none; stroke: #495057; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#495057"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="820" fill="#ffffff"/>
+  <text x="48" y="54" class="title">ConfigModule：从原始 environment 到 typed configuration</text>
+  <text x="48" y="82" class="description">优先级、validation 和 conversion 应在 bootstrap boundary 内完成</text>
+
+  <rect x="60" y="145" width="245" height="96" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="2"/>
+  <text x="182" y="181" text-anchor="middle" class="component">runtime environment</text>
+  <text x="182" y="207" text-anchor="middle" class="description">process.env · deployment 注入</text>
+  <text x="182" y="228" text-anchor="middle" class="label">最高优先级</text>
+
+  <rect x="60" y="300" width="245" height="112" rx="12" fill="#f1f3f5" stroke="#495057" stroke-width="2"/>
+  <text x="182" y="336" text-anchor="middle" class="component">envFilePath[]</text>
+  <text x="182" y="363" text-anchor="middle" class="description">.env.production.local</text>
+  <text x="182" y="385" text-anchor="middle" class="description">.env.production → .env</text>
+  <text x="182" y="406" text-anchor="middle" class="label">先出现的 file 优先</text>
+
+  <rect x="60" y="485" width="245" height="96" rx="12" fill="#ffe8cc" stroke="#d9480f" stroke-width="2"/>
+  <text x="182" y="521" text-anchor="middle" class="component">custom factory</text>
+  <text x="182" y="547" text-anchor="middle" class="description">load / registerAs()</text>
+  <text x="182" y="568" text-anchor="middle" class="label">命名 · default · conversion</text>
+
+  <path d="M 305 193 C 365 193, 365 290, 420 290" class="arrow"/>
+  <path d="M 305 356 L 420 356" class="arrow"/>
+
+  <rect x="420" y="270" width="250" height="116" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <text x="545" y="307" text-anchor="middle" class="component">merge env key/value</text>
+  <text x="545" y="334" text-anchor="middle" class="description">dotenv parse + priority</text>
+  <text x="545" y="359" text-anchor="middle" class="label">同名 key：runtime env 胜出</text>
+
+  <path d="M 545 386 L 545 441" class="arrow"/>
+
+  <polygon points="545,442 665,512 545,582 425,512" fill="#ffe3e3" stroke="#c92a2a" stroke-width="2"/>
+  <text x="545" y="500" text-anchor="middle" class="component">validation</text>
+  <text x="545" y="526" text-anchor="middle" class="description">Joi schema / validate()</text>
+  <text x="545" y="548" text-anchor="middle" class="description">格式 · 范围 · required</text>
+
+  <path d="M 305 533 C 350 533, 350 760, 430 760 L 860 760 L 860 579" class="arrow"/>
+  <text x="770" y="747" text-anchor="middle" class="label">factory 内自行校验</text>
+
+  <path d="M 665 512 L 735 512" class="arrow"/>
+  <text x="700" y="494" text-anchor="middle" class="label" fill="#2b8a3e">通过</text>
+
+  <rect x="735" y="445" width="250" height="134" rx="12" fill="#d3f9d8" stroke="#2b8a3e" stroke-width="2"/>
+  <text x="860" y="482" text-anchor="middle" class="component">configuration store</text>
+  <text x="860" y="510" text-anchor="middle" class="description">ConfigService.get/getOrThrow</text>
+  <text x="860" y="535" text-anchor="middle" class="description">namespace Provider + ConfigType</text>
+  <text x="860" y="560" text-anchor="middle" class="label">typed application config</text>
+
+  <path d="M 985 512 L 1045 512" class="arrow"/>
+
+  <rect x="1045" y="447" width="125" height="130" rx="12" fill="#e5dbff" stroke="#7048e8" stroke-width="2"/>
+  <text x="1107" y="486" text-anchor="middle" class="component">Consumer</text>
+  <text x="1107" y="514" text-anchor="middle" class="description">Service</text>
+  <text x="1107" y="536" text-anchor="middle" class="description">Repository</text>
+  <text x="1107" y="558" text-anchor="middle" class="description">Dynamic Module</text>
+
+  <path d="M 545 582 L 545 655" fill="none" stroke="#c92a2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowhead)"/>
+  <rect x="405" y="654" width="280" height="62" rx="12" fill="#ffe3e3" stroke="#c92a2a" stroke-width="2"/>
+  <text x="545" y="680" text-anchor="middle" class="component">bootstrap fail fast</text>
+  <text x="545" y="702" text-anchor="middle" class="description">缺失或非法配置不启动 application</text>
+</svg>

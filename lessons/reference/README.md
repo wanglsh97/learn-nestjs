@@ -6,6 +6,10 @@
 | --- | --- | --- | --- |
 | [Controller](Controller.md) | HTTP 请求由谁接收 | 路径、查询、请求体 | 调用 Service 并返回协议结果 |
 | [Module](Module.md) | 组件如何组织并形成边界 | Controller、Provider、imported Module | 封装后的 application graph |
+| [ConfigModule](ConfigModule.md) | environment configuration 如何加载和校验 | `.env`、runtime environment、config factory | typed configuration Provider |
+| [HttpModule](HttpModule.md) | application 如何调用 downstream HTTP service | URL、request body、header、timeout | Observable response 或映射后的 exception |
+| [JwtModule](JwtModule.md) | application 如何签发和验证 JWT | claim、secret/key、sign/verify options | signed token 或 verified payload |
+| [SQL Database](SQL.md) | Nest application 如何连接和访问 relational database | Entity、Repository、QueryBuilder、Transaction | 持久化数据与可演进 schema |
 | [Provider](Provider.md) | dependency 由谁创建和组合 | injection token、其他 Provider | 可注入的 instance 或 value |
 | [Decorator](Decorator.md) | metadata 如何声明和复用 | class、method、parameter、property | Nest runtime 可读取的 metadata |
 | [Middleware](Middleware.md) | 路由处理前的底层 HTTP 工作 | 原始请求与响应 | 继续管线或提前结束 |

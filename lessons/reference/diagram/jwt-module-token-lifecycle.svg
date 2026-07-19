@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 790" role="img" aria-labelledby="title desc">
+  <title id="title">JwtModule token lifecycle</title>
+  <desc id="desc">Client 登录后 AuthService 验证 credential 并通过 JwtService 签发 token；后续请求由 Strategy 验证 token，Guard 放行后建立用户上下文。</desc>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@400;500;600&amp;family=Patrick+Hand&amp;display=swap');
+      text { font-family: 'Patrick Hand', 'LXGW WenKai', 'Kaiti SC', 'KaiTi', sans-serif; fill: #1b1b1f; }
+      .title { font-size: 24px; font-weight: 600; }
+      .participant { font-size: 18px; font-weight: 600; }
+      .desc { font-size: 14px; fill: #495057; }
+      .label { font-size: 13px; fill: #1b1b1f; }
+      .life { stroke: #adb5bd; stroke-width: 1.5; stroke-dasharray: 7 7; }
+      .call { fill: none; stroke: #495057; stroke-width: 2; stroke-linecap: round; marker-end: url(#arrow); }
+      .return { fill: none; stroke: #2b8a3e; stroke-width: 2; stroke-dasharray: 7 5; stroke-linecap: round; marker-end: url(#arrow-green); }
+      .reject { fill: none; stroke: #c92a2a; stroke-width: 2; stroke-dasharray: 7 5; stroke-linecap: round; marker-end: url(#arrow-red); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#495057"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#2b8a3e"/></marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#c92a2a"/></marker>
+  </defs>
+  <rect x="1" y="1" width="1198" height="788" rx="16" fill="#fff" stroke="#e9ecef"/>
+  <text x="42" y="48" class="title">JwtModule：签发 token 与建立用户上下文</text>
+  <text x="42" y="74" class="desc">signature 证明 token 未被篡改；Guard 决定是否允许进入 Handler。</text>
+
+  <rect x="38" y="104" width="164" height="66" rx="12" fill="#d0ebff" stroke="#1971c2" stroke-width="2"/>
+  <rect x="278" y="104" width="164" height="66" rx="12" fill="#d3f9d8" stroke="#2b8a3e" stroke-width="2"/>
+  <rect x="518" y="104" width="164" height="66" rx="12" fill="#e5dbff" stroke="#7048e8" stroke-width="2"/>
+  <rect x="758" y="104" width="164" height="66" rx="12" fill="#ffec99" stroke="#e67700" stroke-width="2"/>
+  <rect x="998" y="104" width="164" height="66" rx="12" fill="#ffe8cc" stroke="#d9480f" stroke-width="2"/>
+  <text x="120" y="143" text-anchor="middle" class="participant">Client</text>
+  <text x="360" y="143" text-anchor="middle" class="participant">AuthService</text>
+  <text x="600" y="143" text-anchor="middle" class="participant">User store</text>
+  <text x="840" y="143" text-anchor="middle" class="participant">JwtService</text>
+  <text x="1080" y="143" text-anchor="middle" class="participant">Strategy + Guard</text>
+
+  <line x1="120" y1="170" x2="120" y2="742" class="life"/>
+  <line x1="360" y1="170" x2="360" y2="742" class="life"/>
+  <line x1="600" y1="170" x2="600" y2="742" class="life"/>
+  <line x1="840" y1="170" x2="840" y2="742" class="life"/>
+  <line x1="1080" y1="170" x2="1080" y2="742" class="life"/>
+
+  <rect x="30" y="194" width="900" height="272" rx="14" fill="#f8f9fa" stroke="#adb5bd" stroke-dasharray="8 6"/>
+  <rect x="30" y="194" width="118" height="28" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="89" y="213" text-anchor="middle" class="desc">签发 access token</text>
+
+  <path d="M120 252 H360" class="call"/>
+  <text x="240" y="239" text-anchor="middle" class="label">login(email, password)</text>
+  <path d="M360 306 H600" class="call"/>
+  <text x="480" y="293" text-anchor="middle" class="label">查询 user + 验证 password hash</text>
+  <path d="M600 348 H360" class="return"/>
+  <text x="480" y="337" text-anchor="middle" class="label">user id / role</text>
+  <path d="M360 392 H840" class="call"/>
+  <text x="600" y="379" text-anchor="middle" class="label">signAsync({ sub, role }, expiresIn / iss / aud)</text>
+  <path d="M840 434 H120" class="return"/>
+  <text x="480" y="423" text-anchor="middle" class="label">access token（header.payload.signature）</text>
+
+  <rect x="30" y="500" width="1140" height="242" rx="14" fill="#f8f9fa" stroke="#adb5bd" stroke-dasharray="8 6"/>
+  <rect x="30" y="500" width="128" height="28" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="94" y="519" text-anchor="middle" class="desc">受保护 request</text>
+
+  <path d="M120 564 H1080" class="call"/>
+  <text x="600" y="551" text-anchor="middle" class="label">Authorization: Bearer &lt;token&gt;</text>
+  <path d="M1080 612 H840" class="call"/>
+  <text x="960" y="599" text-anchor="middle" class="label">verify signature + exp + iss + aud + algorithm</text>
+  <path d="M840 654 H1080" class="return"/>
+  <text x="960" y="643" text-anchor="middle" class="label">verified payload</text>
+  <path d="M1080 700 H120" class="return"/>
+  <text x="600" y="687" text-anchor="middle" class="label">Guard 放行 → request.user → Handler</text>
+
+  <path d="M1080 612 C1150 612 1150 680 1084 680" class="reject"/>
+  <text x="1134" y="646" text-anchor="middle" class="desc">无效：401</text>
+</svg>

@@ -36,7 +36,7 @@
 
 ## 核心能力参考
 
-[NestJS 核心能力参考](reference/README.md)集中整理 Module、Controller、Provider、Decorator、Middleware、Guard、Interceptor、Pipe 和 Exception Filter 的职责、注册方式与最小代码示例。它用于开发时快速查阅，不替代按顺序学习课程和运行 Demo。
+[NestJS 核心能力参考](reference/README.md)集中整理 Module、ConfigModule、HttpModule、JwtModule、SQL Database、Controller、Provider、Decorator、Middleware、Guard、Interceptor、Pipe 和 Exception Filter 的职责、注册方式与最小代码示例。它用于开发时快速查阅，不替代按顺序学习课程和运行 Demo。
 
 ## 运行方式
 
